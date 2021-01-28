@@ -74,12 +74,14 @@ vbl = Screen('Flip', window);
  
  endreach =0;
  
+ color = [1 1 1];
+ 
  
  squareYpos=startpos; 
 % Loop the animation until a key is pressed
 while ~KbCheck & ~endreach
     
-    amplitude = screenYpixels *0.01*(yCenter/(yCenter + 4*abs(squareYpos-yCenter))) ;
+    amplitude = screenYpixels *0.015*(yCenter/(yCenter +2* abs(squareYpos-yCenter))) ;
 
     % Position of the square on t his frame
     ypos =  amplitude;
@@ -91,13 +93,16 @@ while ~KbCheck & ~endreach
     if squareYpos >= endpos
         endreach = 1;
     end
+    if (squareYpos-startpos) > (endpos-startpos)
+        color = [0 0 0]; 
+    end 
     
 
     % Center the rectangle on the cent re of the screen
     centeredRect = CenterRectOnPointd(baseRect, xCenter, squareYpos);
 
     % Draw the rect to the screen
-    Screen('DrawDots', window, [xCenter squareYpos], 100, [1 1  1], [], 3);
+    Screen('DrawDots', window, [xCenter squareYpos], 100, color, [], 3);
     
       % Flip to the screen
     vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi); 
@@ -111,7 +116,7 @@ while ~KbCheck & ~endreach
 
 end
 
-Screen('DrawDots', window, [xCenter endpos], 100, [1 1  1 ], [], 3    );
+Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
 vbl = Screen('Flip', window); 
 
 KbPressWait;
