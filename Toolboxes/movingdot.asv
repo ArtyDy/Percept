@@ -121,11 +121,8 @@ array60=array60*amp/(array60(1)-array60(end));
 
  
 array60=abs(array60-array60(1));
-arraydiff(1)=0
 
 for i = 1:length(array60)-1
-    arraydiff(i+1)=array60(i+1)-array60(i)
-end
 
 
 
@@ -145,14 +142,14 @@ color = [1 1 1];
  
 squareYpos=startpos; 
 % Loop the animation until a key is pressed
-k=1;
+k=0;
 while ~KbCheck & ~endreach
     
-%     amplitude = screenYpixels *0.015*(yCenter/(yCenter +2* abs(squareYpos-yCenter))) ;
-    amplitude=arraydiff(k);
+    amplitude = screenYpixels *0.015*(yCenter/(yCenter +2* abs(squareYpos-yCenter))) ;
+%     amplitude=array60(k);
 
     % Position of the square on t his frame
-    ypos =  amplitude ;
+    ypos =  amplitude 
 
     % Add this position to the screen center coordinate. This is the point
     % we want our square to oscillate around
@@ -179,7 +176,7 @@ while ~KbCheck & ~endreach
     time = time + ifi;
     
     
-    k=k+1; 
+     
   
 
 end
