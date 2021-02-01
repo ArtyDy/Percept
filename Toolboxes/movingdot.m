@@ -103,7 +103,7 @@ rectColor = [1 0 0];
 % frequency = 0.2;
 % angFreq = 2 * pi * frequency;
 % startPhase = 0;
-time = 0;
+
 
 % Sync us and get a time stamp
 vbl = Screen('Flip', window);
@@ -121,10 +121,10 @@ array60=array60*amp/(array60(1)-array60(end));
 
  
 array60=abs(array60-array60(1));
-arraydiff(1)=0
+arraydiff(1)=0;
 
 for i = 1:length(array60)-1
-    arraydiff(i+1)=array60(i+1)-array60(i)
+    arraydiff(i+1)=array60(i+1)-array60(i);
 end
 
 
@@ -145,35 +145,54 @@ color = [1 1 1];
  
 squareYpos=startpos; 
 % Loop the animation until a key is pressed
+time = 0;
 k=1;
-while ~KbCheck & ~endreach
+while ~KbCheck 
     
 %     amplitude = screenYpixels *0.015*(yCenter/(yCenter +2* abs(squareYpos-yCenter))) ;
-    amplitude=arraydiff(k);
+    
 
     % Position of the square on t his frame
-    ypos =  amplitude ;
+    
 
     % Add this position to the screen center coordinate. This is the point
     % we want our square to oscillate around
-    squareYpos = squareYpos + ypos;
+    
     
     if squareYpos >= endpos
         endreach = 1;
     end
     if (squareYpos-startpos) > (endpos-startpos)
-        color = [0 0 0]; 
+        color = [1 1 1]; 
     end 
     
+    if endreach ==1
+        
+        Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
+        
+        vbl = Screen('Flip', window); 
+        
+    else 
+        amplitude=arraydiff(k);
+        
+        ypos =  amplitude ;
+        
+        squareYpos = squareYpos + ypos; 
+        
+         % Draw the rect to the screen
+        Screen('DrawDots', window, [xCenter squareYpos], 100, color, [], 3);
+    
+        vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi); 
+    
+    end
 
     % Center the rectan gle on the cent re of the screen
-    centeredRect = CenterRectOnPointd(baseRect, xCenter, squareYpos);
+%     centeredRect = CenterRectOnPointd(baseRect, xCenter, squareYpos);
 
-    % Draw the rect to the screen
-    Screen('DrawDots', window, [xCenter squareYpos], 100, color, [], 3);
+   
     
       % Flip to the screen
-    vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi); 
+    
      
     % Increment the time 
     time = time + ifi;
@@ -184,10 +203,10 @@ while ~KbCheck & ~endreach
 
 end
 
-Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
-vbl = Screen('Flip', window); 
-
-KbPressWait;
+% Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
+% 
+% 
+% KbPressWait;
 
 % Clear the screen
 sca;
