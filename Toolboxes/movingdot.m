@@ -35,6 +35,8 @@ end
 % Here we call some default settings for setting up Psychtoolbox
 PsychDefaultSetup(2);
 
+Screen('Preference', 'SkipSyncTests', 2);
+
 % Get the screen numbers
 screens = Screen('Screens');
 
@@ -50,22 +52,24 @@ black = BlackIndex(screenNumber);
 [window, windowRect] = PsychImaging('OpenWindow', screenNumber, black);
 hertz = Screen('NominalFrameRate', window); 
 
-g=hertz/10; 
+      
+
+g=(hertz+1)/10; 
 b = b*10/g;
 
-array60(1)=array(1)
-array60(g+1)=array(11)
-array60(2*g+1)=array(21)
-array60(3*g+1)=array(31)
-array60(4*g+1)=array(41)
-array60(5*g+1)=array(51)
-array60(6*g+1)=array(61)
-array60(7*g+1)=array(71)
-array60(8*g+1)=array(81)
-array60(9*g+1)=array(91)
-array60(10*g+1)=array(101)
-array60(11*g+1)=array(111)
-array60(11*g+2)=array(112)
+array60(1)=array(1);
+array60(g+1)=array(11);
+array60(2*g+1)=array(21);
+array60(3*g+1)=array(31);
+array60(4*g+1)=array(41);
+array60(5*g+1)=array(51);
+array60(6*g+1)=array(61);
+array60(7*g+1)=array(71);
+array60(8*g+1)=array(81);
+array60(9*g+1)=array(91);
+array60(10*g+1)=array(101);
+array60(11*g+1)=array(111);
+array60(11*g+2)=array(112);
 
 k=1
 for i = 1:g:11*g
@@ -81,6 +85,8 @@ end
 
 % Query the frame duration
 ifi = Screen('GetFlipInterval', window);
+
+rhertz = FrameRate(window);
 
 % Get the centre coordinate of the window
 [xCenter, yCenter] = RectCenter(windowRect);
@@ -113,11 +119,11 @@ waitframes = 1;
 % Maximum priority level
 topPriorityLevel = MaxPriority(window);
 Priority(topPriorityLevel);
-endpos = 0.75*screenYpixels;
-startpos = 0.25*screenYpixels;
+endpos = 0.85*screenYpixels;
+startpos = 0.15*screenYpixels;
 amp=endpos-startpos;
 array60=array60*amp/(array60(1)-array60(end));
-
+ 
 
  
 array60=abs(array60-array60(1));
