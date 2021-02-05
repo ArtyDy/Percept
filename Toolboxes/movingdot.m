@@ -36,7 +36,7 @@ end
 PsychDefaultSetup(2);
 
 Screen('Preference', 'SkipSyncTests', 2);
-
+ 
 % Get the screen numbers
 screens = Screen('Screens');
 
@@ -54,7 +54,8 @@ hertz = Screen('NominalFrameRate', window);
 
       
 
-g=(hertz+1)/10; 
+% g=(hertz+1)/10; 
+g=5;
 b = b*10/g;
 
 array60(1)=array(1);
@@ -135,7 +136,7 @@ end
 
 
 
-Screen('DrawDots', window, [xCenter startpos], 100, [1 1  1], [], 3);
+Screen('DrawDots', window, [xCenter startpos], 150, [1 1  1], [], 3);
 vbl = Screen('Flip', window); 
 
 
@@ -165,16 +166,16 @@ while ~KbCheck
     % we want our square to oscillate around
     
     
-    if squareYpos >= endpos
+    if k >= length(arraydiff)
         endreach = 1;
     end
     if (squareYpos-startpos) > (endpos-startpos)
-        color = [1 1 1]; 
+        color = [1 1 1];   
     end 
     
     if endreach ==1
         
-        Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
+        Screen('DrawDots', window, [xCenter endpos], 150, color, [], 3    );
         
         vbl = Screen('Flip', window); 
         
@@ -186,7 +187,7 @@ while ~KbCheck
         squareYpos = squareYpos + ypos; 
         
          % Draw the rect to the screen
-        Screen('DrawDots', window, [xCenter squareYpos], 100, color, [], 3);
+        Screen('DrawDots', window, [xCenter squareYpos], 150 , color, [], 3);
     
         vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi); 
     
