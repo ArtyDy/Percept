@@ -124,7 +124,6 @@ waitframes = 1;
 
 ntrys=10 ;
 time=zeros(ntrys, 1 );
-clickpos=zeros(ntrys, 2);
 
 cnds = [8 3 1 5 7 6 4 9 2 10];
 trynr=1;
@@ -286,9 +285,7 @@ for cnd = cnds
     end
     
     time(trynr)=timer;
-    [clicks,x,y,whichButton] = GetClicks(window, 0);
-    clickpos(trynr,1)=x;
-    clickpos(trynr, 2)=y;
+    [clicks,x,y,whichButton] = GetClicks(window, interclickSecs][, mouseDev])
     trynr=trynr+1;
     WaitSecs(1);
 end
