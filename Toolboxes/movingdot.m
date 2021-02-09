@@ -126,7 +126,8 @@ ntrys=10 ;
 time=zeros(ntrys, 1 );
 clickpos=zeros(ntrys, 2);
 
-cnds = [8 3 1 5 7 6 4 9 2 10];
+% cnds = [8 3 1 5 7 6 4 9 2 10];
+cnds = [1 2 3 4 5 6 7 8 9 10];
 trynr=1;
 for cnd = cnds
     
@@ -287,8 +288,8 @@ for cnd = cnds
     
     time(trynr)=timer;
     [clicks,x,y,whichButton] = GetClicks(window, 0);
-    clickpos(trynr,1)=x;
-    clickpos(trynr, 2)=y;
+    clickpos(trynr,1)=x*0.105;
+    clickpos(trynr, 2)=y*0.315;
     trynr=trynr+1;
     WaitSecs(1);
 end
