@@ -8,6 +8,15 @@ data = load('coords.mat');
 array =data.data;
 
 array = array - array(end);
+for i=1:length(array)-1
+    arraytest(i)=abs(array(i+1)-array(i));
+end
+
+for i=1:length(arraytest)-1
+    arraytesttest(i)=arraytest(i+1)-arraytest(i);
+end
+
+
 k=1;
 for i = 1:10:length(array)
     
@@ -68,6 +77,71 @@ yCoords = [0 0 -fixCrossDimPix fixCrossDimPix];
 allCoords = [xCoords; yCoords];
 lineWidthPix = 4;
 
+meanac=0.00058656*screenYpixels;
+meandec=-0.00056567*screenYpixels;
+
+
+
+for i=1:64
+    if i<=31
+        array60diffdiff(i)=meanac;
+    else
+        array60diffdiff(i)=meandec;
+    end
+end
+
+for i=1:58
+    if i<=27
+        array40diffdiff(i)=meanac;
+    else
+        array40diffdiff(i)=meandec;
+    end
+end
+
+for i=1:70
+    if i<=34
+        array70diffdiff(i)=meanac;
+    else
+        array70diffdiff(i)=meandec;
+    end
+end
+
+array60diff(1)=arraytest(1);
+
+for i =1:length(array60diffdiff)
+    array60diff(i+1)=array60diff(i) +array60diffdiff(i);
+end
+
+array60test(1)=0;
+
+for i=1:length(array60diff)
+    array60test(i+1)=array60test(i)+array60diff(i);
+end
+
+array40diff(1)=arraytest(1);
+
+for i =1:length(array40diffdiff)
+    array40diff(i+1)=array40diff(i) +array40diffdiff(i);
+end
+
+array40test(1)=0;
+
+for i=1:length(array40diff)
+    array40test(i+1)=array40test(i)+array40diff(i);
+end
+
+array70diff(1)=arraytest(1);
+
+for i =1:length(array70diffdiff)
+    array70diff(i+1)=array70diff(i) +array70diffdiff(i);
+end
+
+array70test(1)=0;
+
+for i=1:length(array70diff)
+    array70test(i+1)=array70test(i)+array70diff(i);
+end
+
 
 
 
@@ -103,6 +177,10 @@ for i = 1:length(array60)-1
     arraydiff(i+1)=array60(i+1)-array60(i);
 end
 
+for i = 1:length(arraydiff)-1
+    arraydiffdiff(i+1)=arraydiff(i+1)-arraydiff(i);
+end
+
 arraydifffast(1)=0;
 k=2;
 for i = 3:2:length(arraydiff)
@@ -130,95 +208,110 @@ clickpos=zeros(ntrys, 2);
 cnds = [1 2 3 4 5 6 7 8 9 10];
 % str_cnds = [DB DM DL UL UM UB DF DS UF US];
 trynr=1;
+btop=0.2*screenYpixels;
+bbot=0.8*screenYpixels;
+bamp=bbot-btop;
+% array60diff=array60diff*bamp/(array60test(end)-array60test(1));
+
 for cnd = cnds
-      
+   
     if cnd == 1
         fac=0.15;
-        vec=arraydiff;
+        vec=array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
         endpos=bot;
+        vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd == 2
         fac=0.20;
-        vec=arraydiff;
+        vec=array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
         endpos=bot;
+%         vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd ==3
         fac=0.25;
-        vec=arraydiff;
+        vec=array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
         endpos=bot;
+        vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd ==4
         fac=0.15;
-        vec=-arraydiff;
+        vec=-array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
         endpos=top;
+        vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd ==5
         fac=0.2;
-        vec=-arraydiff;
+        vec=-array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
         endpos=top;
+        vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd ==6
         fac=0.25;
-        vec=-arraydiff;
+        vec=-array60diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
         endpos=top;
+        vec=vec*amp/(array60test(end)-array60test(1));
     elseif cnd ==7
-        fac=0.2;
-        vec=arraydifffast;
+        fac=0.15;
+        vec=array70diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
-        endpos=bot;
+        endpos=startpos+(array70test(end)-array70test(1));
+%         vec=vec*amp/(array80test(end)-array80test(1));
     elseif cnd ==8
-        fac=0.2;
-        vec=arraydiffslow;
+        fac=0.25;
+        vec=array40diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
-        endpos=bot;
+        endpos=startpos+(array40test(end)-array40test(1));
+%         vec=vec*amp/(array40test(end)-array40test(1));
     elseif cnd==9
-        fac=0.2;
-        vec=-arraydifffast;
+        fac=0.15;
+        vec=-array70diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
-        endpos=top;
+        endpos=startpos-(array70test(end)-array70test(1));
+%         vec=vec*amp/(array80test(end)-array80test(1));
     elseif cnd==10
-        fac=0.2;
-        vec=- arraydiffslow;
+        fac=0.25;
+        vec= -array40diff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
-        endpos=top;
+        endpos=startpos-(array40test(end)-array40test(1));
+%         vec=vec*amp/(array40test(end)-array40test(1));
     end 
-    vec=vec*amp/(array60(end)-array60(1));
+    
     
     timer = 0;
     k=1;
     
-%     Screen('DrawDots', window, [xCenter startpos], 150, [1 1  1],  [], 3);
+
     Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);  
     vbl = Screen('Flip', window);
     
@@ -242,8 +335,9 @@ for cnd = cnds
     
     
     squareYpos=startpos;
+    compteur=0;
     
-    while ~KbCheck & ~endreach
+    while ~KbCheck 
             
         if k >= length(vec)
             endreach = 1;
@@ -252,7 +346,7 @@ for cnd = cnds
         
             
         if abs(squareYpos-startpos) > 0.6*amp
-            color = [0 0 0];
+            color = [1 1 1];
         end
         
         if endreach ==1
@@ -289,7 +383,7 @@ for cnd = cnds
         
         k=k+1;
         
-        
+        compteur=compteur+1;
     end
     
     time(trynr)=timer;
