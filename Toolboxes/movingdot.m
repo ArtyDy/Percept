@@ -128,9 +128,10 @@ clickpos=zeros(ntrys, 2);
 
 % cnds = [8 3 1 5 7 6 4 9 2 10];
 cnds = [1 2 3 4 5 6 7 8 9 10];
+% str_cnds = [DB DM DL UL UM UB DF DS UF US];
 trynr=1;
 for cnd = cnds
-    
+      
     if cnd == 1
         fac=0.15;
         vec=arraydiff;
@@ -222,7 +223,7 @@ for cnd = cnds
     vbl = Screen('Flip', window);
     
     
-     [ seconds, keyCode ] = KbPressWait;
+    [ seconds, keyCode ] = KbPressWait;
         
     keyCode = find(keyCode, 1);
     
@@ -230,9 +231,11 @@ for cnd = cnds
         break; 
     end
     WaitSecs(0.5);
+    Screen('DrawDots', window, [xCenter startpos], 30, [1 1 1], [], 3    );
+            
+    vbl = Screen('Flip', window);
     
-    
-    
+    WaitSecs(2);
     endreach =0;
     
     color = [1 1 1];
@@ -240,18 +243,21 @@ for cnd = cnds
     
     squareYpos=startpos;
     
-    while ~KbCheck 
+    while ~KbCheck & ~endreach
             
         if k >= length(vec)
             endreach = 1;
         end
-        if (squareYpos-startpos) > (endpos-startpos)
-            color = [1 1 1];
+        
+        
+            
+        if abs(squareYpos-startpos) > 0.6*amp
+            color = [0 0 0];
         end
         
         if endreach ==1
             
-            Screen('DrawDots', window, [xCenter endpos], 150, color, [], 3    );
+            Screen('DrawDots', window, [xCenter endpos], 30, color, [], 3    );
             
             vbl = Screen('Flip', window);
             
@@ -263,7 +269,7 @@ for cnd = cnds
             squareYpos = squareYpos + ypos;
             
             % Draw the rect to the screen
-            Screen('DrawDots', window, [xCenter squareYpos], 150 , color, [], 3);
+            Screen('DrawDots', window, [xCenter squareYpos], 30 , color, [], 3);
             
             vbl  = Screen('Flip', window, vbl + (waitframes - 0.5) * ifi);
             
