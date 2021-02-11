@@ -47,6 +47,7 @@ PsychDefaultSetup(2);
 
 Screen('Preference', 'SkipSyncTests', 2);
 Screen('Preference','SuppressAllWarnings',1);
+Screen('Preference', 'VisualDebugLevel', 1 );
  
 % Get the screen numbers
 screens = Screen('Screens');
@@ -64,6 +65,7 @@ black = BlackIndex(screenNumber);
 hertz = Screen('NominalFrameRate', window); 
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 ifi = Screen('GetFlipInterval', window);
+
 rhertz = FrameRate(window);
 [xCenter, yCenter] = RectCenter(windowRect);
 Screen('BlendFunction', window, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -77,16 +79,41 @@ yCoords = [0 0 -fixCrossDimPix fixCrossDimPix];
 allCoords = [xCoords; yCoords];
 lineWidthPix = 4;
 
+
 meanac=0.00058656*screenYpixels;
 meandec=-0.00056567*screenYpixels;
 
+acdown=0.00057656;
+ratiodown=1.028096;
+meanacdown=0.00060685*screenYpixels;
+meandecdown=-0.00054481*screenYpixels;
 
+acup=0.00057656;
+ratioup=1,190328;
+meanacup=0.00064878*screenYpixels;
+meandecup=-0.00051337*screenYpixels;
 
 for i=1:64
-    if i<=31
+    if i<=30
         array60diffdiff(i)=meanac;
     else
         array60diffdiff(i)=meandec;
+    end
+end
+
+for i=1:64
+    if i<=28
+        array60updiffdiff(i)=meanacup;
+    else
+        array60updiffdiff(i)=meandecup;
+    end
+end
+
+for i=1:64
+    if i<=30
+        array60downdiffdiff(i)=meanacdown;
+    else
+        array60downdiffdiff(i)=meandecdown;
     end
 end
 
@@ -98,11 +125,43 @@ for i=1:58
     end
 end
 
+for i=1:58
+    if i<=25
+        array40updiffdiff(i)=meanacup;
+    else
+        array40updiffdiff(i)=meandecup;
+    end
+end
+
+for i=1:58
+    if i<=27
+        array40downdiffdiff(i)=meanacdown;
+    else
+        array40downdiffdiff(i)=meandecdown;
+    end
+end
+
 for i=1:70
-    if i<=34
+    if i<=33
         array70diffdiff(i)=meanac;
     else
         array70diffdiff(i)=meandec;
+    end
+end
+
+for i=1:70
+    if i<=30
+        array70updiffdiff(i)=meanacup;
+    else
+        array70updiffdiff(i)=meandecup;
+    end
+end
+
+for i=1:70
+    if i<=33
+        array70downdiffdiff(i)=meanacdown;
+    else
+        array70downdiffdiff(i)=meandecdown;
     end
 end
 
@@ -118,6 +177,30 @@ for i=1:length(array60diff)
     array60test(i+1)=array60test(i)+array60diff(i);
 end
 
+array60updiff(1)=arraytest(1);
+
+for i =1:length(array60updiffdiff)
+    array60updiff(i+1)=array60updiff(i) +array60updiffdiff(i);
+end
+
+array60uptest(1)=0;
+
+for i=1:length(array60updiff)
+    array60uptest(i+1)=array60uptest(i)+array60updiff(i);
+end
+
+array60downdiff(1)=arraytest(1);
+
+for i =1:length(array60downdiffdiff)
+    array60downdiff(i+1)=array60downdiff(i) +array60downdiffdiff(i);
+end
+
+array60downtest(1)=0;
+
+for i=1:length(array60downdiff)
+    array60downtest(i+1)=array60downtest(i)+array60downdiff(i);
+end
+
 array40diff(1)=arraytest(1);
 
 for i =1:length(array40diffdiff)
@@ -128,6 +211,30 @@ array40test(1)=0;
 
 for i=1:length(array40diff)
     array40test(i+1)=array40test(i)+array40diff(i);
+end
+
+array40updiff(1)=arraytest(1);
+
+for i =1:length(array40updiffdiff)
+    array40updiff(i+1)=array40updiff(i) +array40updiffdiff(i);
+end
+
+array40uptest(1)=0;
+
+for i=1:length(array40updiff)
+    array40uptest(i+1)=array40uptest(i)+array40updiff(i);
+end
+
+array40downdiff(1)=arraytest(1);
+
+for i =1:length(array40downdiffdiff)
+    array40downdiff(i+1)=array40downdiff(i) +array40downdiffdiff(i);
+end
+
+array40downtest(1)=0;
+
+for i=1:length(array40downdiff)
+    array40downtest(i+1)=array40downtest(i)+array40downdiff(i);
 end
 
 array70diff(1)=arraytest(1);
@@ -142,6 +249,29 @@ for i=1:length(array70diff)
     array70test(i+1)=array70test(i)+array70diff(i);
 end
 
+array70updiff(1)=arraytest(1);
+
+for i =1:length(array70updiffdiff)
+    array70updiff(i+1)=array70updiff(i) +array70updiffdiff(i);
+end
+
+array70uptest(1)=0;
+
+for i=1:length(array70updiff)
+    array70uptest(i+1)=array70uptest(i)+array70updiff(i);
+end
+
+array70downdiff(1)=arraytest(1);
+
+for i =1:length(array70downdiffdiff)
+    array70downdiff(i+1)=array70downdiff(i) +array70downdiffdiff(i);
+end
+
+array70downtest(1)=0;
+
+for i=1:length(array70downdiff)
+    array70downtest(i+1)=array70downtest(i)+array70downdiff(i);
+end
 
 
 
@@ -215,115 +345,116 @@ bamp=bbot-btop;
 
 for cnd = cnds
    
+       
     if cnd == 1
         fac=0.15;
-        vec=array60diff;
+        vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
         endpos=bot;
-        vec=vec*amp/(array60test(end)-array60test(1));
+        vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd == 2
         fac=0.20;
-        vec=array60diff;
+        vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=top;
-        endpos=bot;
-%         vec=vec*amp/(array60test(end)-array60test(1));
+        startpos=0.15*screenYpixels+rand*0.1*screenYpixels;;
+        endpos=startpos+amp;
+%         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==3
         fac=0.25;
-        vec=array60diff;
+        vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=top;
-        endpos=bot;
-        vec=vec*amp/(array60test(end)-array60test(1));
+        startpos=0.15*screenYpixels+rand*0.2*screenYpixels;
+        endpos=startpos+amp;
+        vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==4
         fac=0.15;
-        vec=-array60diff;
+        vec=-array60updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
         endpos=top;
-        vec=vec*amp/(array60test(end)-array60test(1));
+        vec=vec*amp/(array60uptest(end)-array60uptest(1));
     elseif cnd ==5
         fac=0.2;
-        vec=-array60diff;
+        vec=-array60updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=bot;
-        endpos=top;
-        vec=vec*amp/(array60test(end)-array60test(1));
+        startpos=0.15*screenYpixels+amp+rand*0.1*screenYpixels;;
+        endpos=startpos-(array60uptest(end)-array60uptest(1));
+%         vec=vec*amp/(array60uptest(end)-array60uptest(1));
     elseif cnd ==6
         fac=0.25;
-        vec=-array60diff;
+        vec=-array60updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=bot;
-        endpos=top;
-        vec=vec*amp/(array60test(end)-array60test(1));
+        startpos=0.15*screenYpixels+amp+rand*0.2*screenYpixels;
+        endpos=startpos-amp;
+        vec=vec*amp/(array60uptest(end)-array60uptest(1));
     elseif cnd ==7
         fac=0.15;
-        vec=array70diff;
+        vec=array70downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=top;
-        endpos=startpos+(array70test(end)-array70test(1));
+        endpos=startpos+(array70downtest(end)-array70downtest(1));
 %         vec=vec*amp/(array80test(end)-array80test(1));
     elseif cnd ==8
         fac=0.25;
-        vec=array40diff;
+        vec=array40downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=top;
-        endpos=startpos+(array40test(end)-array40test(1));
+        startpos=0.15*screenYpixels+rand*0.2*screenYpixels;
+        endpos=startpos+(array40downtest(end)-array40downtest(1));
 %         vec=vec*amp/(array40test(end)-array40test(1));
     elseif cnd==9
-        fac=0.15;
-        vec=-array70diff;
+        fac=0.15;        
+        vec=-array70updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
         startpos=bot;
-        endpos=startpos-(array70test(end)-array70test(1));
+        endpos=startpos-array70uptest(end);
 %         vec=vec*amp/(array80test(end)-array80test(1));
     elseif cnd==10
         fac=0.25;
-        vec= -array40diff;
+        vec= -array40updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=bot;
-        endpos=startpos-(array40test(end)-array40test(1));
+        startpos=0.15*screenYpixels+amp+rand*0.2*screenYpixels;
+        endpos=startpos-(array40uptest(end)-array40uptest(1));
 %         vec=vec*amp/(array40test(end)-array40test(1));
-    end 
+    end  
     
     
     timer = 0;
     k=1;
     
 
-    Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2);  
+    Screen('DrawLines', window, allCoords, lineWidthPix, white, [xCenter yCenter], 2); 
     vbl = Screen('Flip', window);
-    
-    
-    [ seconds, keyCode ] = KbPressWait;
-        
+    [ secs, keyCode, deltasecs ] = KbWait(-1,[], GetSecs +1);
     keyCode = find(keyCode, 1);
     
     if keyCode == 27  
         break; 
     end
-    WaitSecs(0.5);
+
+    
+    vbl = Screen('Flip', window);
+    WaitSecs(0.25+1.25*rand);
     Screen('DrawDots', window, [xCenter startpos], 30, [1 1 1], [], 3    );
             
     vbl = Screen('Flip', window);
@@ -337,7 +468,7 @@ for cnd = cnds
     squareYpos=startpos;
     compteur=0;
     
-    while ~KbCheck 
+    while ~KbCheck & ~endreach    
             
         if k >= length(vec)
             endreach = 1;
@@ -390,10 +521,11 @@ for cnd = cnds
     [clicks,x,y,whichButton] = GetClicks(window, 0);
     clickpos(trynr,1)=x*0.105;
     clickpos(trynr, 2)=y*0.315;
+    vbl = Screen('Flip', window);
     trynr=trynr+1;
-    WaitSecs(1);
+    WaitSecs(1.5+rand);
 end
-
+Screen('Preference', 'VisualDebugLevel', 4);
 % Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
 % 
 % 
