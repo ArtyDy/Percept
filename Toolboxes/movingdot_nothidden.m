@@ -335,7 +335,7 @@ time=zeros(ntrys, 1 );
 clickpos=zeros(ntrys, 2);
 
 % cnds = [8 3 1 5 7 6 4 9 2 10];
-cnds = [1 2 3 4 5 6 7 8 9 10];
+cnds = [ 7 8 9 10];
 % str_cnds = [DB DM DL UL UM UB DF DS UF US];
 trynr=1;
 btop=0.2*screenYpixels;
@@ -347,7 +347,7 @@ for cnd = cnds
    
        
     if cnd == 1
-        fac=0.05;
+        fac=0.15;
         vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
@@ -356,12 +356,12 @@ for cnd = cnds
         endpos=bot;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd == 2
-        fac=0.15;
+        fac=0.20;
         vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=(array60downtest(end)-array60downtest(1));
-        startpos=0.05*screenYpixels+rand*0.1*screenYpixels;;
+        startpos=0.15*screenYpixels+rand*0.1*screenYpixels;;
         endpos=startpos+amp;
 %         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==3
@@ -477,7 +477,7 @@ for cnd = cnds
         
             
         if abs(squareYpos-startpos) > 0.6*amp
-            color = [0 0 0];
+            color = [1 1 1];
         end
         
         if endreach ==1
