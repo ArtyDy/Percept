@@ -335,7 +335,7 @@ time=zeros(ntrys, 1 );
 clickpos=zeros(ntrys, 2);
 
 % cnds = [8 3 1 5 7 6 4 9 2 10];
-cnds = [ 7 8 9 10];
+cnds = [1 2 3 4 5 6 7 8 9 10];
 % str_cnds = [DB DM DL UL UM UB DF DS UF US];
 trynr=1;
 btop=0.2*screenYpixels;
@@ -344,7 +344,7 @@ bamp=bbot-btop;
 % array60diff=array60diff*bamp/(array60test(end)-array60test(1));
 
 for cnd = cnds
-   
+    cnd=1;
        
     if cnd == 1
         fac=0.15;

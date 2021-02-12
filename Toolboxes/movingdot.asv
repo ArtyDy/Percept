@@ -347,30 +347,30 @@ for cnd = cnds
    
        
     if cnd == 1
-        fac=0.15;
+        fac=0.05;
         vec=array60downdiff;
-        bot = (1-fac)*screenYpixels;
+        bot = 0.75*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=top;
-        endpos=bot;
+        startpos=top+rand*0.2*screenYpixels;
+        endpos=startpos+amp;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd == 2
-        fac=0.20;
+        fac=0.05;
         vec=array60downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
-        amp=bot-top;
-        startpos=0.15*screenYpixels+rand*0.1*screenYpixels;;
+        amp=(array60downtest(end)-array60downtest(1));
+        startpos=0.05*screenYpixels+rand*0.3*screenYpixels;;
         endpos=startpos+amp;
 %         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==3
-        fac=0.25;
+        fac=0.05;
         vec=array60downdiff;
-        bot = (1-fac)*screenYpixels;
-        top = fac*screenYpixels;
+        top = 0.05*screenYpixels;
+        bot = 0.55*screenYpixels;
         amp=bot-top;
-        startpos=0.15*screenYpixels+rand*0.2*screenYpixels;
+        startpos=0.5*screenYpixels+rand*0.4*screenYpixels;
         endpos=startpos+amp;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==4
@@ -379,7 +379,7 @@ for cnd = cnds
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
         amp=bot-top;
-        startpos=bot;
+        startpos=0.95*screenYpixels-amp-;
         endpos=top;
         vec=vec*amp/(array60uptest(end)-array60uptest(1));
     elseif cnd ==5
@@ -387,7 +387,7 @@ for cnd = cnds
         vec=-array60updiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
-        amp=bot-top;
+        amp=(array60uptest(end)-array60uptest(1));
         startpos=0.15*screenYpixels+amp+rand*0.1*screenYpixels;;
         endpos=startpos-(array60uptest(end)-array60uptest(1));
 %         vec=vec*amp/(array60uptest(end)-array60uptest(1));
@@ -405,7 +405,7 @@ for cnd = cnds
         vec=array70downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
-        amp=bot-top;
+        amp=array70downtest(end)-array70downtest(1);
         startpos=top;
         endpos=startpos+(array70downtest(end)-array70downtest(1));
 %         vec=vec*amp/(array80test(end)-array80test(1));
@@ -414,7 +414,7 @@ for cnd = cnds
         vec=array40downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
-        amp=(array40downtest(end)-array40downtest(1);
+        amp=array40downtest(end)-array40downtest(1);
         startpos=0.15*screenYpixels+rand*0.2*screenYpixels;
         endpos=startpos+(array40downtest(end)-array40downtest(1));
 %         vec=vec*amp/(array40test(end)-array40test(1));
