@@ -2,7 +2,9 @@
 sca;
 close all;
 clearvars;
-
+sub='sub-test00';
+filepath= fullfile('..', 'Data', sub);
+mkdir(filepath);
 
 data = load('coords.mat');
 array =data.data;
@@ -101,16 +103,16 @@ for i=1:64
     end
 end
 
-for i=1:71
-    if i<=30
+for i=1:65
+    if i<=28
         array60updiffdiff(i)=meanacup;
     else
         array60updiffdiff(i)=meandecup;
     end
 end
 
-for i=1:71
-    if i<=33
+for i=1:65
+    if i<=31
         array60downdiffdiff(i)=meanacdown;
     else
         array60downdiffdiff(i)=meandecdown;
@@ -343,10 +345,11 @@ btop=0.2*screenYpixels;
 bbot=0.8*screenYpixels;
 bamp=bbot-btop;
 % array60diff=array60diff*bamp/(array60test(end)-array60test(1));
-realtimes= [1.20000000000000;1.20000000000000;1.20000000000000;1.20000000000000;1.20000000000000;1.20000000000000;1.30000000000000;1.10000000000000;1.30000000000000;1.10000000000000];
+realtimes= [1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.20000000000000;1.00000000000000;1.20000000000000;1.00000000000000];
 for cnd = cnds
    
-       
+    cnd=1;
+    
     if cnd == 1
         fac=0.05;
         vec=array60downdiff;
@@ -459,6 +462,7 @@ for cnd = cnds
     Screen('DrawDots', window, [xCenter startpos], 30, [1 1 1], [], 3    );
             
     vbl = Screen('Flip', window);
+    KbPressWait;
     
     WaitSecs(2);
     endreach =0;
@@ -468,6 +472,7 @@ for cnd = cnds
     
     squareYpos=startpos;
     compteur=0;
+    
     
     while ~KbCheck & ~endreach
             
@@ -528,6 +533,12 @@ for cnd = cnds
     trynr=trynr+1;
     WaitSecs(1.5+rand);
 end
+
+
+filename_t = fullfile(filepath, [sub,'_terror.mat']);
+filename_y = strcat(sub, [sub,'_yerror.mat']);
+save(filename_t, 'terror');
+save(filename_y, 'yerror');
 Screen('Preference', 'VisualDebugLevel', 4);
 % Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );
 % 
