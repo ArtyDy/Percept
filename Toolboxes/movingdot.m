@@ -86,14 +86,20 @@ meanac=0.00058656*screenYpixels;
 meandec=-0.00056567*screenYpixels;
 
 acdown=0.00057656;
-ratiodown=1.028096;
+ratiodown=1.107454;
 meanacdown=0.00060685*screenYpixels;
-meandecdown=-0.00054481*screenYpixels;
+meandecdown=-(0.00060685/ratiodown)*screenYpixels;
 
 acup=0.00057656;
-ratioup=1.190328;
+ratioup=1.339906;
 meanacup=0.00064878*screenYpixels;
-meandecup=-0.00051337*screenYpixels;
+meandecup=-(0.00064878/ratioup)*screenYpixels;
+% meanacup=0.053160*0.7*screenYpixels;
+% meandecup=-0.039674*0.7*screenYpixels;
+% 
+% meanacdown=0.047124*0.7*screenYpixels;
+% meandecdown=-0.042371*0.7*screenYpixels;
+
 
 for i=1:64
     if i<=30
@@ -136,7 +142,7 @@ for i=1:59
 end
 
 for i=1:59
-    if i<=27
+    if i<=28
         array40downdiffdiff(i)=meanacdown;
     else
         array40downdiffdiff(i)=meandecdown;
@@ -152,7 +158,7 @@ for i=1:70
 end
 
 for i=1:71
-    if i<=30
+    if i<=31
         array70updiffdiff(i)=meanacup;
     else
         array70updiffdiff(i)=meandecup;
@@ -160,14 +166,14 @@ for i=1:71
 end
 
 for i=1:71
-    if i<=33
+    if i<=34
         array70downdiffdiff(i)=meanacdown;
     else
         array70downdiffdiff(i)=meandecdown;
     end
 end
 
-array60diff(1)=arraytest(1);
+array60diff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array60diffdiff)
     array60diff(i+1)=array60diff(i) +array60diffdiff(i);
@@ -179,7 +185,7 @@ for i=1:length(array60diff)
     array60test(i+1)=array60test(i)+array60diff(i);
 end
 
-array60updiff(1)=arraytest(1);
+array60updiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array60updiffdiff)
     array60updiff(i+1)=array60updiff(i) +array60updiffdiff(i);
@@ -191,7 +197,7 @@ for i=1:length(array60updiff)
     array60uptest(i+1)=array60uptest(i)+array60updiff(i);
 end
 
-array60downdiff(1)=arraytest(1);
+array60downdiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array60downdiffdiff)
     array60downdiff(i+1)=array60downdiff(i) +array60downdiffdiff(i);
@@ -203,7 +209,7 @@ for i=1:length(array60downdiff)
     array60downtest(i+1)=array60downtest(i)+array60downdiff(i);
 end
 
-array40diff(1)=arraytest(1);
+array40diff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array40diffdiff)
     array40diff(i+1)=array40diff(i) +array40diffdiff(i);
@@ -215,7 +221,7 @@ for i=1:length(array40diff)
     array40test(i+1)=array40test(i)+array40diff(i);
 end
 
-array40updiff(1)=arraytest(1);
+array40updiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array40updiffdiff)
     array40updiff(i+1)=array40updiff(i) +array40updiffdiff(i);
@@ -227,7 +233,7 @@ for i=1:length(array40updiff)
     array40uptest(i+1)=array40uptest(i)+array40updiff(i);
 end
 
-array40downdiff(1)=arraytest(1);
+array40downdiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array40downdiffdiff)
     array40downdiff(i+1)=array40downdiff(i) +array40downdiffdiff(i);
@@ -251,7 +257,7 @@ for i=1:length(array70diff)
     array70test(i+1)=array70test(i)+array70diff(i);
 end
 
-array70updiff(1)=arraytest(1);
+array70updiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array70updiffdiff)
     array70updiff(i+1)=array70updiff(i) +array70updiffdiff(i);
@@ -263,7 +269,7 @@ for i=1:length(array70updiff)
     array70uptest(i+1)=array70uptest(i)+array70updiff(i);
 end
 
-array70downdiff(1)=arraytest(1);
+array70downdiff(1)=(arraytest(1)/array(1))*0.7*screenYpixels;
 
 for i =1:length(array70downdiffdiff)
     array70downdiff(i+1)=array70downdiff(i) +array70downdiffdiff(i);
