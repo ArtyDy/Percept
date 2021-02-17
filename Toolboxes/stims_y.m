@@ -340,7 +340,7 @@ waitframes = 1;
 
 ntrys=10 ;
 time=zeros(ntrys, 1 );
-terror=zeros(ntrys, 1);
+% terror=zeros(ntrys, 1);
 clickpos=zeros(ntrys, 2);
 yerror=zeros(ntrys, 1);
 % cnds = [8 3 1 5 7 6 4 9 2 10];
@@ -354,7 +354,6 @@ bamp=bbot-btop;
 realtimes= [1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.20000000000000;1.00000000000000;1.20000000000000;1.00000000000000];
 for cnd = cnds
    
-    cnd=1;
     
     if cnd == 1
         fac=0.05;
@@ -489,7 +488,7 @@ for cnd = cnds
         
             
         if abs(squareYpos-startpos) > 0.6*amp
-            color = [1 1 1];
+            color = [0 0 0];
         end
         
         if endreach ==1
@@ -546,7 +545,7 @@ end
 
 
 % filename_t = fullfile(filepath, [sub,'_terror.mat']);
-filename_y = strcat(sub, [sub,'_yerror.mat']);
+filename_y = fullfile(filepath, [sub,'_yerror.mat']);
 % save(filename_t, 'terror');
 save(filename_y, 'yerror');
 Screen('Preference', 'VisualDebugLevel', 4);
