@@ -364,6 +364,7 @@ for cnd = cnds
         startpos=top+rand*0.15*screenYpixels;
         endpos=startpos+amp;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
+        hidestep=42;
     elseif cnd == 2
         fac=0.05;
         vec=array60downdiff;
@@ -373,6 +374,7 @@ for cnd = cnds
         startpos=0.05*screenYpixels+rand*0.1*screenYpixels;;
         endpos=startpos+amp;
 %         vec=vec*amp/(array60downtest(end)-array60downtest(1));
+        hidestep=42;
     elseif cnd ==3
         fac=0.05;
         vec=array60downdiff;
@@ -382,6 +384,7 @@ for cnd = cnds
         startpos=0.05*screenYpixels+rand*0.2*screenYpixels;
         endpos=startpos+amp;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
+        hidestep=42;
     elseif cnd ==4
         fac=0.2;
         vec=-array60updiff;
@@ -391,6 +394,7 @@ for cnd = cnds
         startpos=0.95*screenYpixels-rand*0.15*screenYpixels;
         endpos=startpos-amp;
         vec=vec*amp/(array60uptest(end)-array60uptest(1));
+        hidestep=39;
     elseif cnd ==5
         fac=0.2;
         vec=-array60updiff;
@@ -400,6 +404,7 @@ for cnd = cnds
         startpos=0.95*screenYpixels-rand*0.1*screenYpixels;
         endpos=startpos-(array60uptest(end)-array60uptest(1));
 %         vec=vec*amp/(array60uptest(end)-array60uptest(1));
+        hidestep=39;
     elseif cnd ==6
         fac=0.25;
         vec=-array60updiff;
@@ -409,6 +414,7 @@ for cnd = cnds
         startpos=0.95*screenYpixels-rand*0.2*screenYpixels;
         endpos=startpos-amp;
         vec=vec*amp/(array60uptest(end)-array60uptest(1));
+        hidestep=39;
     elseif cnd ==7
         fac=0.15;
         vec=array70downdiff;
@@ -418,6 +424,7 @@ for cnd = cnds
         startpos=0.05*screenYpixels+0.1*rand*screenYpixels;
         endpos=startpos+(array70downtest(end)-array70downtest(1));
 %         vec=vec*amp/(array80test(end)-array80test(1));
+        hidestep=45;
     elseif cnd ==8
         fac=0.25;
         vec=array40downdiff;
@@ -427,6 +434,7 @@ for cnd = cnds
         startpos=0.05*screenYpixels+rand*0.2*screenYpixels;
         endpos=startpos+(array40downtest(end)-array40downtest(1));
 %         vec=vec*amp/(array40test(end)-array40test(1));
+        hidestep=39;
     elseif cnd==9
         fac=0.15;        
         vec=-array70updiff;
@@ -436,6 +444,7 @@ for cnd = cnds
         startpos=0.95*screenYpixels-rand*0.1*screenYpixels;
         endpos=startpos-(array70uptest(end)-array70uptest(1));
 %         vec=vec*amp/(array80test(end)-array80test(1));
+        hidestep=42;
     elseif cnd==10
         fac=0.25;
         vec= -array40updiff;
@@ -445,12 +454,14 @@ for cnd = cnds
         startpos=0.95*screenYpixels-rand*0.2*screenYpixels;
         endpos=startpos-(array40uptest(end)-array40uptest(1));
 %         vec=vec*amp/(array40test(end)-array40test(1));
+        hidestep=36;
     end  
     
     
     timer = 0;
     k=1;
     
+    HideCursor();
 
     Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 
     vbl = Screen('Flip', window);
@@ -487,15 +498,21 @@ for cnd = cnds
         
         
             
-        if abs(squareYpos-startpos) > 0.6*amp
-            color = [0 0 0];
+%         if abs(squareYpos-startpos) > 0.6*amp
+%             color = [0 0 0];
+%         end
+        if compteur >= hidestep
+            color = [0 1 0];
         end
         
         if endreach ==1
             
             Screen('DrawDots', window, [xCenter endpos], 20, color, [], 3    );
             
+            
+            
             vbl = Screen('Flip', window);
+            break;
             
         else
             amplitude=vec(k);
@@ -521,17 +538,24 @@ for cnd = cnds
         
         % Increment the time
         timer = timer + ifi;
-        [x,y,buttons,focus,valuators,valinfo] = GetMouse();
-        if buttons(1)
-            clickpos(trynr,1)=x;
-            clickpos(trynr, 2)=y;
-            break;
-        end
+        
+%         if buttons(1)
+%             clickpos(trynr,1)=x;
+%             clickpos(trynr, 2)=y;
+%             break;
+%         end
         k=k+1;
         
         compteur=compteur+1;
     end
     
+    WaitSecs(0.5 + rand);
+    SetMouse(0.75*screenXpixels, 0.5*screenYpixels, window);
+    ShowCursor();
+%     [x,y,buttons,focus,valuators,valinfo] = GetMouse();
+    [clicks,x,y,whichButton]=GetClicks(window);
+    clickpos(trynr,1)=x;
+    clickpos(trynr, 2)=y;
     time(trynr)=timer;
     terror(trynr)=realtimes(trynr)-time(trynr);
 %     [clicks,x,y,whichButton] = GetClicks(window, 0);
