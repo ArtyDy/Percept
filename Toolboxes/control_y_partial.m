@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-00AD';
+sub='sub-test00';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath);
 
@@ -342,8 +342,9 @@ waitframes = 1;
 
 % cnds = [8 3 1 5 7 6 4 9 2 10];
 cnds = [1 2 3 4 5 6 1 7 8 4 9 10];
-xp_cnds = [8,1,7,10,4,5,1,4,4,4,3,9,1,7,9,5,8,9,1,3,1,4,4,4,6,1,5,6,10,4,5,1,5,5,10,9,1,7,1,5,6,4,1,4,4,1,8,5,2,4,1,5,2,6,3,1,10,9,4,4,6,10,4,3,7,8,4,3,3,4,1,4,9,8,6,7,7,1,9,10,2,10,9,7,1,7,6,8,2,8,8,1,8,6,3,1,10,9,3,6,2,4,7,2,6,1,4,3,10,10,2,8,7,2,5,2,3,2,1,9];
+% xp_cnds = [8,1,7,10,4,5,1,4,4,4,3,9,1,7,9,5,8,9,1,3,1,4,4,4,6,1,5,6,10,4,5,1,5,5,10,9,1,7,1,5,6,4,1,4,4,1,8,5,2,4,1,5,2,6,3,1,10,9,4,4,6,10,4,3,7,8,4,3,3,4,1,4,9,8,6,7,7,1,9,10,2,10,9,7,1,7,6,8,2,8,8,1,8,6,3,1,10,9,3,6,2,4,7,2,6,1,4,3,10,10,2,8,7,2,5,2,3,2,1,9];
 % xp_cnds=[1 2 3 4 5 6 1 7 8 4 9 10];
+xp_cnds = [ 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 ];
 % str_cnds = [DB DM DL UL UM UB DF DS UF US];
 ntrys=length(xp_cnds) ;
 time=zeros(ntrys, 1 );
@@ -511,7 +512,7 @@ for cnd = xp_cnds
         
         if endreach ==1
             
-            Screen('DrawDots', window, [xCenter endpos], 20, color, [], 3    );
+            Screen('DrawDots', window, [xCenter endpos], 20, [0 0 0], [], 3    );
             
             
             
@@ -574,8 +575,8 @@ end
 
 
 % filename_t = fullfile(filepath, [sub,'_terror.mat']);
-filename_y = fullfile(filepath, [sub,'_infer_yerror.mat']);
-filename_y2 = fullfile(filepath, [sub,'_infer_pos.mat']);
+filename_y = fullfile(filepath, [sub,'_control_yerror_partial.mat']);
+filename_y2 = fullfile(filepath, [sub,'_control_pos_partial.mat']);
 % save(filename_t, 'terror');
 save(filename_y, 'yerror');
 save(filename_y2, 'clickpos');

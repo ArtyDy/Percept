@@ -4,7 +4,7 @@ close all;
 clearvars;
 sub='sub-00AD';
 filepath= fullfile('..', 'Data', sub);
-mkdir(filepath);
+mkdir(filepath);    
 
 data = load('coords.mat');
 array =data.data;
@@ -341,7 +341,8 @@ waitframes = 1;
 
 % cnds = [8 3 1 5 7 6 4 9 2 10];
 cnds = [1 2 3 4 5 6 1 7 8 4 9 10];
-xp_cnds = [8,1,7,10,4,5,1,4,4,4,3,9,1,7,9,5,8,9,1,3,1,4,4,4,6,1,5,6,10,4,5,1,5,5,10,9,1,7,1,5,6,4,1,4,4,1,8,5,2,4,1,5,2,6,3,1,10,9,4,4,6,10,4,3,7,8,4,3,3,4,1,4,9,8,6,7,7,1,9,10,2,10,9,7,1,7,6,8,2,8,8,1,8,6,3,1,10,9,3,6,2,4,7,2,6,1,4,3,10,10,2,8,7,2,5,2,3,2,1,9];
+% xp_cnds = [8,1,7,10,4,5,1,4,4,4,3,9,1,7,9,5,8,9,1,3,1,4,4,4,6,1,5,6,10,4,5,1,5,5,10,9,1,7,1,5,6,4,1,4,4,1,8,5,2,4,1,5,2,6,3,1,10,9,4,4,6,10,4,3,7,8,4,3,3,4,1,4,9,8,6,7,7,1,9,10,2,10,9,7,1,7,6,8,2,8,8,1,8,6,3,1,10,9,3,6,2,4,7,2,6,1,4,3,10,10,2,8,7,2,5,2,3,2,1,9];
+xp_cnds=[1 2 3 4 5 6 7 8 9 10];
 ntrys=length(xp_cnds) ;
 time=zeros(ntrys, 1 );
 terror=zeros(ntrys, 1);
@@ -354,6 +355,7 @@ bbot=0.8*screenYpixels;
 bamp=bbot-btop;
 % array60diff=array60diff*bamp/(array60test(end)-array60test(1));
 realtimes= [1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.20000000000000;1.00000000000000;1.20000000000000;1.00000000000000];
+xp_realtimes=realtimes(xp_cnds);
 HideCursor();
 
 for cnd = xp_cnds
@@ -369,7 +371,7 @@ for cnd = xp_cnds
         startpos=top+rand*0.15*screenYpixels;
         endpos=startpos+amp;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
-        hidestep=36;
+        hidestep=32;
     elseif cnd == 2
         fac=0.05;
         vec=array60downdiff;
@@ -378,7 +380,7 @@ for cnd = xp_cnds
         amp=(array60downtest(end)-array60downtest(1)); % 72% screenYpixels
         startpos=0.05*screenYpixels+rand*0.1*screenYpixels;;
         endpos=startpos+amp;
-        hidestep=36;
+        hidestep=32;
 %         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==3
         fac=0.05;
@@ -388,7 +390,7 @@ for cnd = xp_cnds
         amp=bot-top; % 50%
         startpos=0.05*screenYpixels+rand*0.2*screenYpixels;
         endpos=startpos+amp;
-        hidestep=36;
+        hidestep=32;
         vec=vec*amp/(array60downtest(end)-array60downtest(1));
     elseif cnd ==4
         fac=0.2;
@@ -399,7 +401,7 @@ for cnd = xp_cnds
         startpos=0.95*screenYpixels-rand*0.15*screenYpixels;
         endpos=startpos-amp;
         vec=vec*amp/(array60uptest(end)-array60uptest(1));
-        hidestep=33;
+        hidestep=29;
     elseif cnd ==5
         fac=0.2;
         vec=-array60updiff;
@@ -408,7 +410,7 @@ for cnd = xp_cnds
         amp=(array60uptest(end)-array60uptest(1)); % 68 % %
         startpos=0.95*screenYpixels-rand*0.1*screenYpixels;
         endpos=startpos-(array60uptest(end)-array60uptest(1));
-        hidestep=33;
+        hidestep=29;
 %         vec=vec*amp/(array60uptest(end)-array60uptest(1));
     elseif cnd ==6
         fac=0.25;
@@ -419,7 +421,7 @@ for cnd = xp_cnds
         startpos=0.95*screenYpixels-rand*0.2*screenYpixels;
         endpos=startpos-amp;
         vec=vec*amp/(array60uptest(end)-array60uptest(1));
-        hidestep=33;
+        hidestep=29;
     elseif cnd ==7
         fac=0.15;
         vec=array70downdiff;
@@ -429,9 +431,9 @@ for cnd = xp_cnds
         startpos=0.05*screenYpixels+0.1*rand*screenYpixels;
         endpos=startpos+(array70downtest(end)-array70downtest(1));
 %         vec=vec*amp/(array80test(end)-array80test(1));
-        hidestep=39;
+        hidestep=35;
     elseif cnd ==8
-        fac=0.25;
+        fac=0.29;
         vec=array40downdiff;
         bot = (1-fac)*screenYpixels;
         top = fac*screenYpixels;
@@ -448,7 +450,7 @@ for cnd = xp_cnds
         amp=(array70uptest(end)-array70uptest(1)); % 70 %
         startpos=0.95*screenYpixels-rand*0.1*screenYpixels;
         endpos=startpos-(array70uptest(end)-array70uptest(1));
-        hidestep=36;
+        hidestep=32;
 %         vec=vec*amp/(array80test(end)-array80test(1));
     elseif cnd==10
         fac=0.25;
@@ -458,7 +460,7 @@ for cnd = xp_cnds
         amp=array40uptest(end)-array40uptest(1); % 50 %
         startpos=0.95*screenYpixels-rand*0.2*screenYpixels;
         endpos=startpos-(array40uptest(end)-array40uptest(1));
-        hidestep=30;
+        hidestep=26;
 %         vec=vec*amp/(array40test(end)-array40test(1));
     end  
     
@@ -505,8 +507,8 @@ for cnd = xp_cnds
 %         if abs(squareYpos-startpos) > 0.6*amp
 %             color = [0 1 0];
 %         end
-        if compteur >= hidestep
-            color = [0 1 0];
+        if k > hidestep+1
+            color = [0 0 0];
         end
         
         if endreach ==1
@@ -547,7 +549,7 @@ for cnd = xp_cnds
     end
     
     time(trynr)=timer;
-    terror(trynr)=realtimes(trynr)-time(trynr);
+    terror(trynr)=xp_realtimes(trynr)-time(trynr);
 %     [clicks,x,y,whichButton] = GetClicks(window, 0);
 %     yerror(trynr)=endpos-y;
 %     clickpos(trynr,1)=x*0.105;
@@ -558,9 +560,11 @@ for cnd = xp_cnds
 end
 
 ShowCursor();
-filename_t = fullfile(filepath, [sub,'_terror.mat']);
+filename_t = fullfile(filepath, [sub,'_training_t.mat']);
+filename_t2 = fullfile(filepath, [sub,'_training_terror.mat']);
 % filename_y = strcat(sub, [sub,'_yerror.mat']);
-save(filename_t, 'terror');
+save(filename_t, 'time');
+save(filename_t2, 'terror');
 % save(filename_y, 'yerror');
 Screen('Preference', 'VisualDebugLevel', 4);
 % Screen('DrawDots', window, [xCenter endpos], 100, color, [], 3    );

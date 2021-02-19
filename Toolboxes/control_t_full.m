@@ -342,7 +342,7 @@ waitframes = 1;
 % cnds = [8 3 1 5 7 6 4 9 2 10];
 cnds = [1 2 3 4 5 6 1 7 8 4 9 10];
 % xp_cnds = [8,1,7,10,4,5,1,4,4,4,3,9,1,7,9,5,8,9,1,3,1,4,4,4,6,1,5,6,10,4,5,1,5,5,10,9,1,7,1,5,6,4,1,4,4,1,8,5,2,4,1,5,2,6,3,1,10,9,4,4,6,10,4,3,7,8,4,3,3,4,1,4,9,8,6,7,7,1,9,10,2,10,9,7,1,7,6,8,2,8,8,1,8,6,3,1,10,9,3,6,2,4,7,2,6,1,4,3,10,10,2,8,7,2,5,2,3,2,1,9];
-xp_cnds = [ 1 2 3 4 5 6 7 8 9 10 ];
+xp_cnds = [ 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 1 2 3 4 5 6 7 8 9 10 ];
 ntrys=length(xp_cnds) ;
 time=zeros(ntrys, 1 );
 terror=zeros(ntrys, 1);
@@ -550,7 +550,7 @@ for cnd = xp_cnds
     end
     
     time(trynr)=timer;
-    terror(trynr)=realtimes(trynr)-time(trynr);
+    terror(trynr)=-(xp_realtimes(trynr)-time(trynr));
 %     [clicks,x,y,whichButton] = GetClicks(window, 0);
 %     yerror(trynr)=endpos-y;
 %     clickpos(trynr,1)=x*0.105;
@@ -561,8 +561,8 @@ for cnd = xp_cnds
 end
 
 ShowCursor();
-filename_t = fullfile(filepath, [sub,'_control_terror.mat']);
-filename_t2 = fullfile(filepath, [sub, '_control_time.mat']);
+filename_t = fullfile(filepath, [sub,'_control_terror_full.mat']);
+filename_t2 = fullfile(filepath, [sub, '_control_time_full.mat']);
 % filename_y = strcat(sub, [sub,'_yerror.mat']);
 save(filename_t, 'terror');
 save(filename_t2, 'time');
