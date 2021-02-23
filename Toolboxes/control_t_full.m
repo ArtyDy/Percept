@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-00AD';
+sub='sub-00test';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath);
 
@@ -464,7 +464,7 @@ for cnd = xp_cnds
         hidestep=33;
 %         vec=vec*amp/(array40test(end)-array40test(1));
     end  
-    
+    disp(trynr);
     
     timer = 0;
     k=1;

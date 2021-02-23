@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-test00';
+sub='sub-00test';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath);
 
@@ -359,7 +359,7 @@ bamp=bbot-btop;
 realtimes= [1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.20000000000000;1.00000000000000;1.20000000000000;1.00000000000000];
 for cnd = xp_cnds
    
-    
+    disp(trynr);
     if cnd == 1
         fac=0.05;
         vec=array60downdiff;

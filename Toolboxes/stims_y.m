@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-00AD';
+sub='sub-00test';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath);
 
@@ -358,7 +358,7 @@ bamp=bbot-btop;
 realtimes= [1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.10000000000000;1.20000000000000;1.00000000000000;1.20000000000000;1.00000000000000];
 for cnd = xp_cnds
    
-    
+    disp(trynr);
     if cnd == 1
         fac=0.05;
         vec=array60downdiff;
@@ -464,7 +464,19 @@ for cnd = xp_cnds
     
     timer = 0;
     k=1;
-    
+    if trynr==30
+        Screen('DrawLines', window, allCoords, lineWidthPix, [1 1 1], [xCenter yCenter], 2); 
+        vbl = Screen('Flip', window);
+        KbPressWait();
+    elseif trynr==60
+        Screen('DrawLines', window, allCoords, lineWidthPix, [1 1 1], [xCenter yCenter], 2); 
+        vbl = Screen('Flip', window);
+        KbPressWait();
+    elseif trynr==90
+        Screen('DrawLines', window, allCoords, lineWidthPix, [1 1 1], [xCenter yCenter], 2); 
+        vbl = Screen('Flip', window);
+        KbPressWait();
+    end
     HideCursor();
 
     Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 

@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-00AD';
+sub='sub-00test';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath); 
 
@@ -480,9 +480,20 @@ for cnd = xp_cnds
 %         vec=vec*amp/(array40test(end)-array40test(1));
     end  
     
+    disp(trynr);
     
     timer = 0;
     k=1;
+    if trynr==30
+        Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 
+        KbPressWait();
+    elseif trynr==60
+        Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 
+        KbPressWait();
+    elseif trynr==90
+        Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 
+        KbPressWait();
+    end
     
 
     Screen('DrawLines', window, allCoords, lineWidthPix, [0 1 0], [xCenter yCenter], 2); 

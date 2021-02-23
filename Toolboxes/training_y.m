@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-test00';
+sub='sub-00test';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath);
 
