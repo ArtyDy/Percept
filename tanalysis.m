@@ -1,6 +1,8 @@
-sub= 'sub-02PC';
+clearvars;
 
-filepath= fullfile( 'Data', sub, 'infer_terror.mat');
+sub= 'sub-05DB';
+
+filepath= fullfile( 'Data', sub, 'sub-05DB_infer_terror.mat');
 
 
 data = load(filepath);
