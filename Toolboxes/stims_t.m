@@ -2,7 +2,7 @@
 sca;
 close all;
 clearvars;
-sub='sub-00test';
+sub='sub-00AD';
 filepath= fullfile('..', 'Data', sub);
 mkdir(filepath); 
 
@@ -523,7 +523,7 @@ for cnd = xp_cnds
     compteur=0;
     
     
-    while ~KbCheck & ~endreach
+    while ~KbCheck 
         
         compteur=compteur+1;
         if k >= length(vec)
